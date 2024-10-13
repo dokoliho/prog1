@@ -1,6 +1,11 @@
 import math
 from turtle import Turtle
 
+def main():
+    sophia = Turtle()
+    draw_santas_house(sophia, 200)
+    sophia.screen.mainloop()
+
 def draw_santas_house(turtle, length):
     turtle.left(90)
     turtle.forward(length)
@@ -19,9 +24,4 @@ def draw_santas_house(turtle, length):
     turtle.right(30)
     turtle.forward(length)
 
-
-
-Turtle.draw_santas_house = draw_santas_house
-sophia = Turtle()
-sophia.draw_santas_house(200)
-sophia.screen.mainloop()
+main()

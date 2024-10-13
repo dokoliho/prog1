@@ -5,8 +5,9 @@ from turtle import Turtle
 sophia = Turtle()
 
 sophia.pensize(50)
-sophia.screen.colormode(255) # RGB-Farben aktivieren
-sophia.pencolor(199, 36, 38)
+sophia.pencolor('#c72426')
 sophia.forward(50)
 
 sophia.screen.mainloop()
+
+

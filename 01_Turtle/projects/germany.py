@@ -1,36 +1,40 @@
 # Zeichnen der Flagge Deutschlands mit der Turtle
 
-from turtle import *
+from turtle import Turtle
 
-def draw_rectangle(width, height):
-    begin_fill()
-    forward(width)
-    right(90)
-    forward(height)
-    right(90)
-    forward(width)
-    right(90)
-    forward(height)
-    right(90)
-    end_fill()
+def main():
+    sophia = Turtle()
+    sophia.pencolor('Black')
+    sophia.fillcolor('Black')
+    draw_rectangle(sophia,200, 50)
+    next_shape(sophia)
+    sophia.pencolor('Red')
+    sophia.fillcolor('Red')
+    draw_rectangle(sophia, 200,50)
+    next_shape(sophia)
+    sophia.pencolor('Yellow')
+    sophia.fillcolor('Yellow')
+    draw_rectangle(sophia, 200,50)
+    sophia.hideturtle()
+    sophia.screen.mainloop()
 
-def next_shape():
-    penup()
-    right(90)
-    forward(50)
-    left(90)
-    pendown()
+def draw_rectangle(turtle, width, height):
+    turtle.begin_fill()
+    turtle.forward(width)
+    turtle.right(90)
+    turtle.forward(height)
+    turtle.right(90)
+    turtle.forward(width)
+    turtle.right(90)
+    turtle.forward(height)
+    turtle.right(90)
+    turtle.end_fill()
 
-pencolor('Black')
-fillcolor('Black')
-draw_rectangle(200, 50)
-next_shape()
-pencolor('Red')
-fillcolor('Red')
-draw_rectangle(200,50)
-next_shape()
-pencolor('Yellow')
-fillcolor('Yellow')
-draw_rectangle(200,50)
+def next_shape(turtle):
+    turtle.penup()
+    turtle.right(90)
+    turtle.forward(50)
+    turtle.left(90)
+    turtle.pendown()
 
-done()
+main()

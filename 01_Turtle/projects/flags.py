@@ -1,6 +1,18 @@
 # Zeichnen von Flaggen mit der Turtle
 from turtle import Turtle
 
+def main():
+    Turtle.draw_flag = draw_flag
+    sophia = Turtle()
+    sophia.draw_flag('green', 'white', 'red')
+    sophia.backward(600)
+    sophia.right(90)
+    sophia.forward(400)
+    sophia.left(90)
+    sophia.draw_flag('blue', 'white', 'red')
+    sophia.hideturtle()
+    sophia.screen.mainloop()
+
 def draw_flag(turtle, color1, color2, color3):
     turtle.pencolor('black')
     turtle.pendown()
@@ -15,7 +27,6 @@ def draw_segment(turtle, color):
     draw_filled_rectangle(turtle, 200, 300)
     turtle.forward(200)
 
-
 def draw_filled_rectangle(turtle, width, height):
     turtle.begin_fill()
     draw_rectangle(turtle, width, height)
@@ -29,13 +40,4 @@ def draw_rectangle(turtle, width, height):
         turtle.left(90)
 
 
-Turtle.draw_flag = draw_flag
-sophia = Turtle()
-sophia.draw_flag('green', 'white', 'red')
-sophia.backward(600)
-sophia.right(90)
-sophia.forward(400)
-sophia.left(90)
-sophia.draw_flag('blue', 'white', 'red')
-sophia.hideturtle()
-sophia.screen.mainloop()
+main()

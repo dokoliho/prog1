@@ -1,5 +1,12 @@
 from turtle import Turtle
 
+def main():
+    sophia = Turtle()
+    sophia.screen.bgcolor('blue')
+    draw_building(sophia)
+    sophia.hideturtle()
+    sophia.screen.mainloop()
+
 def draw_building(turtle):
     turtle.fillcolor('black')
     turtle.pencolor('black')
@@ -32,7 +39,6 @@ def next_window(turtle):
     turtle.forward(30)
     turtle.pendown()
 
-
 def draw_filled_rectangle(turtle, width, height):
     turtle.begin_fill()
     for _ in range(2):
@@ -42,9 +48,4 @@ def draw_filled_rectangle(turtle, width, height):
         turtle.left(90)
     turtle.end_fill()
 
-
-sophia = Turtle()
-sophia.screen.bgcolor('blue')
-draw_building(sophia)
-sophia.hideturtle()
-sophia.screen.mainloop()
+main()

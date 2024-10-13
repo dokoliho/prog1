@@ -1,4 +1,4 @@
-# Sophia zeichnet eine farbige Linie
+# Sophia zeichnet eine farbige Linie mit Hintergrund
 
 from turtle import Turtle
 
@@ -7,6 +7,7 @@ sophia = Turtle()
 def main():
     sophia.hideturtle()
     sophia.pensize(5)
+    sophia.screen.bgcolor('yellow')
     sophia.back(100)
     draw_colored_line()
     sophia.screen.mainloop()
@@ -26,3 +27,4 @@ def draw_colored_line():
     sophia.forward(30)
 
 main()
+

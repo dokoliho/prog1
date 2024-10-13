@@ -2,6 +2,20 @@
 
 from turtle import Turtle
 
+def main():
+    sophia = Turtle()
+    sophia.hideturtle()
+    draw_h(sophia)
+    space(sophia)
+    draw_e(sophia)
+    space(sophia)
+    draw_l(sophia)
+    space(sophia)
+    draw_l(sophia)
+    space(sophia)
+    draw_o(sophia)
+    sophia.screen.mainloop()
+
 def space(turtle):
     turtle.penup()
     turtle.forward(30)
@@ -50,17 +64,4 @@ def draw_o(turtle):
     turtle.forward(40)
     turtle.pendown()
 
-sophia = Turtle()
-sophia.speed(0)
-draw_h(sophia)
-space(sophia)
-draw_e(sophia)
-space(sophia)
-draw_l(sophia)
-space(sophia)
-draw_l(sophia)
-space(sophia)
-draw_o(sophia)
-
-
-sophia.screen.mainloop()
+main()

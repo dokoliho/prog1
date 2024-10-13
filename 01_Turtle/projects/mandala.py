@@ -2,19 +2,24 @@
 
 from turtle import Turtle
 
-sophia = Turtle()
-sophia.speed(0)
+def main():
+    sophia = Turtle()
+    sophia.speed(0)
+    draw_mandala(sophia)
+    sophia.screen.mainloop()
 
-for _ in range(36):
-    sophia.pencolor("Blue")
-    sophia.circle(100)
-    sophia.pencolor("Red")
-    sophia.forward(200)
-    sophia.left(120)
-    sophia.color("Orange")
-    sophia.forward(100)
-    sophia.left(70)
-    sophia.forward(15)
 
-sophia.screen.mainloop()
+def draw_mandala(turtle):
+    for _ in range(36):
+        turtle.pencolor("Blue")
+        turtle.circle(100)
+        turtle.pencolor("Red")
+        turtle.forward(200)
+        turtle.left(120)
+        turtle.color("Orange")
+        turtle.forward(100)
+        turtle.left(70)
+        turtle.forward(15)
 
+
+main()

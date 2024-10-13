@@ -1,7 +1,11 @@
 # Zeichnen eines Quadrats variabler Größe mit der Turtle
 from turtle import Turtle
 
-sophia = Turtle()
+def main():
+    sophia = Turtle()
+    sophia.hideturtle()
+    draw_square(sophia, 100)
+    sophia.screen.mainloop()
 
 # Eine Turtle zeichnet ein Quadrat
 def draw_square(turtle, length):
@@ -9,6 +13,5 @@ def draw_square(turtle, length):
         turtle.forward(length)
         turtle.right(90)
 
-draw_square(sophia, 100)
+main()
 
-sophia.screen.mainloop()

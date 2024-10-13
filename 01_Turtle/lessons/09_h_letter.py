@@ -1,6 +1,10 @@
 from turtle import Turtle
 
-sophia = Turtle()
+def main():
+    sophia = Turtle()
+    sophia.hideturtle()
+    draw_h(sophia)
+    sophia.screen.mainloop()
 
 def draw_h(turtle):
     turtle.left(90)
@@ -13,6 +17,5 @@ def draw_h(turtle):
     turtle.backward(100)
     turtle.right(90)
 
-draw_h(sophia)
 
-sophia.screen.mainloop()
+main()

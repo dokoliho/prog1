@@ -1,5 +1,19 @@
 from turtle import Turtle
 
+def main():
+    sophia = Turtle()
+    sophia.pencolor('red')
+    sophia.fillcolor('red')
+    draw_segment(sophia, 240, 100)
+    sophia.pencolor('blue')
+    sophia.fillcolor('blue')
+    draw_segment(sophia,90, 100)
+    sophia.pencolor('green')
+    sophia.fillcolor('green')
+    draw_segment(sophia, 30, 100)
+    sophia.hideturtle()
+    sophia.screen.mainloop()
+
 def draw_segment(turtle, degree, length):
     turtle.pendown()
     turtle.begin_fill()
@@ -15,17 +29,4 @@ def draw_segment(turtle, degree, length):
     turtle.backward(length)
     turtle.right(90)
 
-
-Turtle.draw_segment = draw_segment
-sophia = Turtle()
-sophia.pencolor('red')
-sophia.fillcolor('red')
-sophia.draw_segment(240, 100)
-sophia.pencolor('blue')
-sophia.fillcolor('blue')
-sophia.draw_segment(90, 100)
-sophia.pencolor('green')
-sophia.fillcolor('green')
-sophia.draw_segment(30, 100)
-sophia.hideturtle()
-sophia.screen.mainloop()
+main()
