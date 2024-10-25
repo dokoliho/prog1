@@ -62,7 +62,7 @@ def update_game():
     global ball, counts
     ball = (ball[0] + ball[2], ball[1] + ball[3], ball[2], ball[3] + ACCELERATION)
     for nail in nails:
-        if abs(nail[0] - ball[0]) <= NAIL_RADIUS and abs(nail[1] - ball[1]) <= NAIL_RADIUS:
+        if test_circle_collision(nail[0], nail[1], NAIL_RADIUS, ball[0], ball[1], BALL_RADIUS):
             x_speed = random.choice([-2, 2])
             ball = (ball[0] + NAIL_RADIUS * x_speed // 2, ball[1], x_speed, 0)
     if ball[1] >= HEIGHT - BOX_HEIGHT:
@@ -71,6 +71,8 @@ def update_game():
         ball = (WIDTH // 2, 0, 0, 0)
     return True
 
+def test_circle_collision(c1x, c1y, c1r, c2x, c2y, c2r):
+    return (c1x - c2x) ** 2 + (c1y - c2y) ** 2 <= (c1r + c2r) ** 2
 
 # Zeichnen des Spiels
 def draw_game(screen):
