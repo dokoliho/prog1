@@ -1,3 +1,4 @@
+# Zahlenraten für zwei Spieler
 
 def main():
     print('Willkommen beim Zahlenraten!')
@@ -6,13 +7,14 @@ def main():
     print(f"Die Zahl {number} wurde nach {count} Versuchen erraten.")
 
 
+# Eingabe der zu erratenden Zahl durch Spieler 1
 def enter_number():
     number = int(input("Spieler(in) 1, geben Sie die zu erratende Zahl ein: "))
     for _ in range(100):
         print()
     return number
 
-
+# Erraten der Zahl durch Spieler 2
 def find_number(number):
     count = 0
     guess = -1

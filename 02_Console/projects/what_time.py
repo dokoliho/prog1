@@ -1,9 +1,16 @@
 # Berechnung der Uhrzeit für Menschen
 
-sec = int(input("Wie viele Sekunden sind seit Mitternacht vergangen? "))
+SECONDS_PER_MINUTE = 60
+MINUTES_PER_HOUR = 60
+SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR
 
-hours = sec // 3600
-minutes = (sec % 3600) // 60
-seconds = sec % 60
+def main():
+    sec = int(input("Wie viele Sekunden sind seit Mitternacht vergangen? "))
 
-print (f"Es ist {hours:02}:{minutes:02}:{seconds:02}.")
+    hours = sec // SECONDS_PER_HOUR
+    minutes = (sec % SECONDS_PER_HOUR) // SECONDS_PER_MINUTE
+    seconds = sec % SECONDS_PER_MINUTE
+
+    print (f"Es ist {hours:02}:{minutes:02}:{seconds:02}.")
+
+main()
