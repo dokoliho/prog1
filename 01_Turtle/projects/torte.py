@@ -1,32 +1,36 @@
 from turtle import Turtle
 
+from turtle import Turtle
+
+
 def main():
     sophia = Turtle()
-    sophia.pencolor('red')
-    sophia.fillcolor('red')
-    draw_segment(sophia, 240, 100)
-    sophia.pencolor('blue')
-    sophia.fillcolor('blue')
-    draw_segment(sophia,90, 100)
-    sophia.pencolor('green')
-    sophia.fillcolor('green')
-    draw_segment(sophia, 30, 100)
+    sophia.speed(1)
+    sophia.screen.bgcolor("white")
+
+    draw_pie_chart(sophia)
+
     sophia.hideturtle()
     sophia.screen.mainloop()
 
-def draw_segment(turtle, degree, length):
-    turtle.pendown()
+
+def draw_pie_chart(turtle):
+    draw_segment(turtle, 240, 'red')  # Sophia 240 Grad
+    draw_segment(turtle, 90, 'blue')  # Zoe 90 Grad
+    draw_segment(turtle, 30, 'green')  # Reeborg 30 Grad
+
+
+def draw_segment(turtle, angle, color):
+    turtle.fillcolor(color)
     turtle.begin_fill()
-    turtle.circle(length, degree)
+    turtle.forward(100)
     turtle.left(90)
-    turtle.forward(length)
-    turtle.right(degree)
-    turtle.backward(length)
+    turtle.circle(100, angle)
+    turtle.left(90)
+    turtle.forward(100)
     turtle.end_fill()
-    turtle.penup()
-    turtle.forward(length)
-    turtle.left(degree)
-    turtle.backward(length)
-    turtle.right(90)
+    turtle.left(180)
 
 main()
+
+

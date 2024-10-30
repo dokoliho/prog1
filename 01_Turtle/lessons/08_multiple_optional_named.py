@@ -1,8 +1,17 @@
-def print_lines(line1="Hello", line2="World"):
-    print(line1)
-    print(line2)
 
 
-print_lines(line2="WTF?")
+from turtle import Turtle
+
+sophia = Turtle()
 
 
+def set_colors(pen_color="red", bg_color="blue"):
+    sophia.screen.bgcolor(bg_color)
+    sophia.pencolor(pen_color)
+
+
+set_colors(bg_color="green") # Benannter Parameter
+
+sophia.forward(100)
+
+sophia.screen.mainloop()

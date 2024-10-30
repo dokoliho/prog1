@@ -9,62 +9,53 @@ def main():
     zoe.pencolor('white')
     zoe.fillcolor('white')
 
-
-    zoe.begin_fill()
-    zoe.left(90)
-    zoe.penup()
-    zoe.forward(300)
-    zoe.left(90)
-    zoe.circle(150, 180)
-    zoe.end_fill()
-
-    sophia.begin_fill()
-    sophia.circle(150, 180)
-    sophia.penup()
-    sophia.left(90)
-    sophia.forward(300)
-    sophia.left(90)
-    sophia.end_fill()
-
-    zoe.penup()
-    zoe.left(90)
-    zoe.forward(150)
-    zoe.right(90)
-    zoe.pendown()
-    zoe.begin_fill()
-    zoe.circle(75,180)
-    zoe.left(90)
-    zoe.forward(150)
-    zoe.end_fill()
-
-    sophia.pendown()
-    sophia.begin_fill()
-    sophia.left(90)
-    sophia.forward(150)
-    sophia.left(90)
-    sophia.circle(75,180)
-    sophia.end_fill()
-
-    zoe.penup()
-    zoe.forward(85)
-    zoe.left(90)
-    zoe.pendown()
-    zoe.begin_fill()
-    zoe.circle(10)
-    zoe.end_fill()
-
-    sophia.penup()
-    sophia.left(90)
-    sophia.forward(235)
-    sophia.left(90)
-    sophia.pendown()
-    sophia.begin_fill()
-    sophia.circle(10)
-    sophia.end_fill()
+    draw_yin_yang(sophia, zoe, radius=100)
 
     sophia.hideturtle()
     zoe.hideturtle()
     sophia.screen.mainloop()
+
+
+def draw_yin_yang(sophia, zoe, radius):
+    # Schwarze Hälfte
+    sophia.penup()
+    sophia.goto(0, -radius)
+    sophia.pendown()
+    sophia.begin_fill()
+    sophia.circle(radius, 180)  # Halbkreis
+    sophia.circle(radius // 2, 180)
+    sophia.circle(-radius // 2, 180)
+    sophia.end_fill()
+
+    # Weiße Hälfte
+    zoe.penup()
+    zoe.goto(0, -radius)
+    zoe.left(180)
+    zoe.pendown()
+    zoe.begin_fill()
+    zoe.circle(-radius, 180)  # Halbkreis
+    zoe.left(180)
+    zoe.circle(radius // 2, 180)
+    zoe.circle(-radius // 2, 180)
+    zoe.end_fill()
+
+    # Schwarzer Punkt
+    sophia.penup()
+    sophia.goto(0, -((radius // 2) - (radius // 10)))
+    sophia.pendown()
+    sophia.begin_fill()
+    sophia.circle(radius // 10)
+    sophia.end_fill()
+
+    # Weißer Punkt
+    zoe.penup()
+    zoe.goto(0, (radius // 2) + (radius // 10))
+    zoe.pendown()
+    zoe.begin_fill()
+    zoe.circle(radius // 10)
+    zoe.end_fill()
+
+
 
 
 main()
