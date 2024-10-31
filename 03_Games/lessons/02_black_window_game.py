@@ -17,6 +17,7 @@ def main():
 # Initialisierung von Pygame
 def init_game():
     pygame.init()
+    pygame.display.set_caption('ProgI')
     return pygame.display.set_mode(SIZE)
 
 
