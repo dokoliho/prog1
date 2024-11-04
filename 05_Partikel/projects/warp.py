@@ -30,6 +30,7 @@ def init_game():
     screen = pygame.display.set_mode(SIZE)
     init_clock()
     init_stars()
+    pygame.display.set_caption("Warp")
     return screen
 
 

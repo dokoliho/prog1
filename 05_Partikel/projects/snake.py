@@ -33,6 +33,7 @@ def init_game():
     init_clock()
     init_food()
     init_snake()
+    pygame.display.set_caption("Snake")
     game_over = False
     return screen
 
