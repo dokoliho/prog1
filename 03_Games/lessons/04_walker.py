@@ -21,6 +21,7 @@ def init_game():
     global position
     position = (WIDTH // 2, HEIGHT // 2)
     pygame.init()
+    pygame.display.set_caption('Walker')
     return pygame.display.set_mode(SIZE)
 
 

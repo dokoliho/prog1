@@ -7,7 +7,7 @@ WIDTH = 640
 HEIGHT = 400
 SIZE = (WIDTH, HEIGHT)
 FPS = 60
-BLACK = (0, 0, 0)
+GREY = (100, 100, 100)
 BLUE = (0, 0, 255)
 
 CIRCLE_RADIUS = 4
@@ -40,15 +40,16 @@ def init_clock():
     clock = pygame.time.Clock()
 
 
-# Initialisierung der Nahrung
+# Initialisierung der Tropfen
 def init_drops():
     global drops, density, wind, drop_surface
     drops = []
     density = DENSITY
     wind = (0, 0)
     drop_surface = pygame.Surface((CIRCLE_RADIUS * 2, CIRCLE_RADIUS * 2))
+    drop_surface.fill((0, 0, 0, 0))
     pygame.draw.circle(drop_surface, BLUE, (CIRCLE_RADIUS, CIRCLE_RADIUS), CIRCLE_RADIUS)
-    drop_surface = drop_surface.convert_alpha()
+    drop_surface = drorain.pyp_surface.convert_alpha()
     add_drops()
 
 
@@ -119,13 +120,12 @@ def update_game():
 
 # Zeichnen des Spiels
 def draw_game(screen):
-    screen.fill(BLACK)
+    screen.fill(GREY)
     for drop in drops:
         drop.draw(screen)
     pygame.display.flip()
 
-
-# Start des Programms
-main()
+if __name__ == "__main__":
+    main()
 
 

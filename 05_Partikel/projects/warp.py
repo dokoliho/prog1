@@ -12,7 +12,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 MAX_RADIUS = 3
-MAX_ACCELERATION = 4
+MAX_ACCELERATION = 8
 STAR_COUNT = 50
 
 
@@ -43,29 +43,35 @@ def init_clock():
 # Initialisierung der Nahrung
 def init_stars():
     global stars
-    stars = []
-    for i in range(STAR_COUNT):
-        star = Particle(0,0)
-        init_one_star(star)
-        stars.append(star)
+    stars = [new_star() for _ in range(STAR_COUNT)]
 
 
-def init_one_star(star):
-    star.position = (random.randint(0, WIDTH), random.randint(0, HEIGHT))
+def new_star():
+    star = Particle(random.randint(0, WIDTH), random.randint(0, HEIGHT))
+
+    # Der Stern bewegt sich weg von der Mitte des Bildschirms
     star.velocity = (star.position[0] - WIDTH // 2, star.position[1] - HEIGHT // 2)
     star.velocity = normalize(star.velocity)
+
+    # Der Stern erhält eine zufällige Beschleunigung in die Richtung seiner Bewegung
     star.acceleration = (star.velocity[0] * random.randint(1, MAX_ACCELERATION),
                          star.velocity[1] * random.randint(1, MAX_ACCELERATION))
-    star.brightness = random.randint(128, 255)
-    star.radius = random.randint(1, MAX_RADIUS)
-    surface = pygame.Surface((star.radius * 2, star.radius * 2))
+
+    # Der Stern erhält eine zufällige Helligkeit und Größe
+    brightness = random.randint(128, 255)
+    radius = random.randint(1, MAX_RADIUS)
+
+    # Generierung der Oberfläche des Sterns
+    surface = pygame.Surface((radius * 2, radius * 2))
     pygame.draw.circle(surface,
-                       (star.brightness, star.brightness, star.brightness),
-                       (star.radius, star.radius),
-                       star.radius)
+                       (brightness, brightness, brightness),
+                       (radius, radius),
+                       radius)
     star.set_surface(surface.convert_alpha())
+    return star
 
 
+# Der Vektor wird auf die Länge 1 normiert
 def normalize(vector):
     length = math.sqrt(vector[0] ** 2 + vector[1] ** 2)
     return (vector[0] / length, vector[1] / length)
@@ -97,11 +103,20 @@ def event_handling():
 
 # Aktualisierung des Spiels
 def update_game():
+    global stars
+    new_stars = []
     for star in stars:
+        star.apply_force((star.acceleration[0], star.acceleration[1]))
         star.update()
-        if star.position[0] < 0 or star.position[0] > WIDTH or star.position[1] < 0 or star.position[1] > HEIGHT:
-            init_one_star(star)
+        if star.position[0] < 0 or star.position[0] > WIDTH:
+            new_stars.append(new_star())
+        elif star.position[1] < 0 or star.position[1] > HEIGHT:
+            new_stars.append(new_star())
+        else:
+            new_stars.append(star)
+    stars = new_stars
     return True
+
 
 
 # Zeichnen des Spiels
@@ -113,4 +128,5 @@ def draw_game(screen):
 
 
 # Start des Programms
-main()
+if __name__ == "__main__":
+    main()

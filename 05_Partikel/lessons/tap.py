@@ -8,7 +8,8 @@ HEIGHT = 400
 SIZE = (WIDTH, HEIGHT)
 FPS = 30
 BLACK = (0, 0, 0)
-BLUE = (0, 0, 255)
+WHITE = (255, 255, 255)
+LIGHT_BLUE = (100, 150, 200)
 
 CIRCLE_RADIUS = 4
 GRAVITY = (0, 0.1)
@@ -26,6 +27,7 @@ def init_game():
     random.seed()
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
+    pygame.display.set_caption("Tap")
     init_clock()
     init_drops()
     return screen
@@ -37,7 +39,7 @@ def init_clock():
     clock = pygame.time.Clock()
 
 
-# Initialisierung der Nahrung
+# Initialisierung der Tropfen
 def init_drops():
     global drops
     drops = []
@@ -48,7 +50,9 @@ def add_drop():
     global drops, last_drop
     drop_particle = Particle(WIDTH // 2, 0)
     surface = pygame.Surface((CIRCLE_RADIUS * 2, CIRCLE_RADIUS * 2))
-    pygame.draw.circle(surface, BLUE, (CIRCLE_RADIUS, CIRCLE_RADIUS), CIRCLE_RADIUS)
+    surface.fill(WHITE)
+    surface.set_colorkey(WHITE)
+    pygame.draw.circle(surface, LIGHT_BLUE, (CIRCLE_RADIUS, CIRCLE_RADIUS), CIRCLE_RADIUS)
     drop_particle.set_surface(surface.convert_alpha())
     drops.append(drop_particle)
     last_drop = pygame.time.get_ticks()     # Time of last drop in milliseconds
@@ -96,13 +100,13 @@ def update_game():
 
 # Zeichnen des Spiels
 def draw_game(screen):
-    screen.fill(BLACK)
+    screen.fill(WHITE)
     for drop in drops:
         drop.draw(screen)
     pygame.display.flip()
 
 
-# Start des Programms
-main()
+if __name__ == "__main__":
+    main()
 
 

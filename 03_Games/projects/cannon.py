@@ -17,6 +17,7 @@ def main():
         position = (position[0] + speed[0], position[1] + speed[1])
         print(f"Position: {position[0]:.2f}, {position[1]:.2f}")
         time += 1
+    print(time, position[0])
 
     # Berechnung der exakten Werte
     flighttime = calculate_flighttime(alpha, v_null)

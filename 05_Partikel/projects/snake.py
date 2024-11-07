@@ -185,5 +185,5 @@ def draw_game(screen):
     pygame.display.flip()
 
 
-# Start des Programms
-main()
+if __name__ == '__main__':
+    main()
