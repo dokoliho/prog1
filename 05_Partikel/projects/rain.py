@@ -9,6 +9,7 @@ SIZE = (WIDTH, HEIGHT)
 FPS = 60
 GREY = (100, 100, 100)
 BLUE = (0, 0, 255)
+WHITE = (255, 255, 255)
 
 CIRCLE_RADIUS = 4
 GRAVITY = (0, 0.1)
@@ -47,9 +48,10 @@ def init_drops():
     density = DENSITY
     wind = (0, 0)
     drop_surface = pygame.Surface((CIRCLE_RADIUS * 2, CIRCLE_RADIUS * 2))
-    drop_surface.fill((0, 0, 0, 0))
+    drop_surface.fill(WHITE)
+    drop_surface.set_colorkey(WHITE)
     pygame.draw.circle(drop_surface, BLUE, (CIRCLE_RADIUS, CIRCLE_RADIUS), CIRCLE_RADIUS)
-    drop_surface = drorain.pyp_surface.convert_alpha()
+    drop_surface = drop_surface.convert_alpha()
     add_drops()
 
 
