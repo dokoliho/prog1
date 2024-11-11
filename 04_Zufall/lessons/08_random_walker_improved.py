@@ -29,6 +29,7 @@ def init_game():
     random.seed()
     clock = pygame.time.Clock()
     pygame.init()
+    pygame.display.set_caption("Random Walker")
     return pygame.display.set_mode(SIZE)
 
 
