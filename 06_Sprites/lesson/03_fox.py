@@ -7,6 +7,8 @@ WIDTH = 640
 HEIGHT = 480
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+NEXT_IMAGE = 200
+SPEED = 50
 
 class Fox(Particle):
     def __init__(self, x, y):
@@ -23,6 +25,25 @@ class Fox(Particle):
                 image = pygame.transform.scale(image, (64, 64))
                 self.images.append(image.convert_alpha())
         self.sequence = 0
+        self.timer = 0
+
+    def update(self, delta_time):
+        self.timer += delta_time
+        if self.timer > NEXT_IMAGE/1000:
+            self.sequence = (self.sequence + 1) % 4
+            self.timer = 0
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            self.velocity = (0, -SPEED)
+        elif keys[pygame.K_DOWN]:
+            self.velocity = (0, SPEED)
+        elif keys[pygame.K_LEFT]:
+            self.velocity = (-SPEED, 0)
+        elif keys[pygame.K_RIGHT]:
+            self.velocity = (SPEED, 0)
+        super().update(delta_time)
+
+
 
     def draw(self, screen):
         sequence = [1]
