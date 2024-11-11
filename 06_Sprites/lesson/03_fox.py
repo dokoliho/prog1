@@ -3,6 +3,8 @@ import random
 from game import Game
 from particle import Particle
 
+WIDTH = 640
+HEIGHT = 480
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
@@ -36,4 +38,29 @@ class Fox(Particle):
         surface = self.images[index]
         blit_position = (self.position[0] - surface.get_width()/2,
                          self.position[1] - surface.get_height()/2)
-        screen.blit(self.surface, blit_position)
+        screen.blit(surface, blit_position)
+
+
+class RunningFox(Game):
+    def init_game_state(self):
+        self.fox = Fox(WIDTH // 2, HEIGHT // 2)
+
+    def handle_event(self, event):
+        if not super().handle_event(event):
+            return False
+        return True
+
+    def update_game(self):
+        super().update_game()
+        self.fox.update(self.dt)
+        return True
+
+    def draw_game(self):
+        self.screen.fill(BLACK)
+        self.fox.draw(self.screen)
+        pygame.display.flip()
+
+
+if __name__ == "__main__":
+    game = RunningFox("Running Fox")
+    game.run()

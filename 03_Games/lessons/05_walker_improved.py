@@ -12,7 +12,7 @@ KEY_UP = 0
 KEY_DOWN = 1
 KEY_LEFT = 2
 KEY_RIGHT = 3
-SPEED = 3
+SPEED = 5
 
 
 # Hauptfunktion mit Standardstruktur eines Pygame

@@ -27,8 +27,9 @@ class Game:
     def init_game(self):
         pygame.init()
         pygame.display.set_caption(self.title)
+        screen = pygame.display.set_mode(self.size)
         self.init_game_state()
-        return pygame.display.set_mode(self.size)
+        return screen
 
     # Initialisierung des Spielzustands
     # Sollte in abgeleiteten Klassen überschrieben werden
