@@ -34,9 +34,9 @@ class Particle:
 
     def draw(self, screen):
         if self._surface is not None:
-            blit_positon = (self.position[0] - self._surface.get_width()/2,
-                            self.position[1] - self._surface.get_height()/2)
-            screen.blit(self._surface, blit_positon)
+            blit_position = (self.position[0] - self._surface.get_width()/2,
+                             self.position[1] - self._surface.get_height()/2)
+            screen.blit(self._surface, blit_position)
 
 
 if __name__ == "__main__":
