@@ -140,9 +140,17 @@ def check_bounce():
         ball.velocity = (-ball.velocity[0], ball.velocity[1])
     if ball.position[1] < 0:
         ball.velocity = (ball.velocity[0], -ball.velocity[1])
-    if (ball.position[1] + BALL_RADIUS > HEIGHT - PADDLE_HEIGHT and
-            abs(ball.position[0] - paddle.position[0]) < PADDLE_WIDTH // 2):
-        ball.velocity = (ball.velocity[0], -ball.velocity[1])
+
+    rect = pygame.Rect(0, 0, PADDLE_WIDTH, PADDLE_HEIGHT)
+    rect.center = paddle.position
+    distance_x, distance_y = circle_rect_distance(ball.position, rect)
+    if distance_x ** 2 + distance_y ** 2 < BALL_RADIUS **2:
+        if ball.position[1] < rect.top:
+            # Hit from Top
+            ball.velocity = (ball.velocity[0], -ball.velocity[1])
+        elif ball.position[0] < rect.left or ball.position[0] > rect.right:
+            # Hit from Left or Right
+            ball.velocity = (-ball.velocity[0], -ball.velocity[1])
 
 
 def update_paddle():
@@ -155,24 +163,32 @@ def update_paddle():
 
 def check_hit_brick(brick):
     global ball
-    if ball.position[0] + BALL_RADIUS < brick.position[0] - BRICK_WIDTH // 2:
+    rect = pygame.Rect(0, 0, BRICK_WIDTH, BRICK_HEIGHT)
+    rect.center = brick.position
+    distance_x, distance_y = circle_rect_distance(ball.position, rect)
+    if distance_x ** 2 + distance_y ** 2 >= BALL_RADIUS **2:
         return False
-    if ball.position[0] - BALL_RADIUS > brick.position[0] + BRICK_WIDTH // 2:
-        return False
-    if ball.position[1] + BALL_RADIUS < brick.position[1] - BRICK_HEIGHT // 2:
-        return False
-    if ball.position[1] - BALL_RADIUS > brick.position[1] + BRICK_HEIGHT // 2:
-        return False
-    hit_left_right = (abs(ball.position[0] - brick.position[0]) < BALL_RADIUS + BRICK_WIDTH // 2)
-    hit_top_bottom = (abs(ball.position[1] - brick.position[1]) < BALL_RADIUS + BRICK_HEIGHT // 2)
     random_drift = 1 + random.random() * 0.1
-    if hit_top_bottom:
-        ball.velocity = (ball.velocity[0] * random_drift, -ball.velocity[1])
-    elif hit_left_right:
+    if ball.position[1] < rect.top or ball.position[1] > rect.bottom:
+        # Hit from Top or Bottom
         ball.velocity = (- ball.velocity[0], ball.velocity[1] * random_drift)
+    else:
+        # Hit from Left or Right
+        ball.velocity = (ball.velocity[0] * random_drift, -ball.velocity[1])
     return True
 
+def circle_rect_distance(circle_position, rect):
+    circle_x, circle_y = circle_position
+    closest_x, closest_y = closest_pos_on_rect(circle_position, rect)
+    distance_x = circle_x - closest_x
+    distance_y = circle_y - closest_y
+    return distance_x, distance_y
 
+def closest_pos_on_rect(circle_position, rect):
+    circle_x, circle_y = circle_position
+    closest_x = max(rect.left, min(circle_x, rect.right))
+    closest_y = max(rect.top, min(circle_y, rect.bottom))
+    return closest_x, closest_y
 
 # Zeichnen des Spiels
 def draw_game(screen):
