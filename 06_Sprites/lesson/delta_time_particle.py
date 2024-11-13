@@ -1,4 +1,3 @@
-import pygame
 from particle import Particle
 
 class DeltaTimeParticle(Particle):
