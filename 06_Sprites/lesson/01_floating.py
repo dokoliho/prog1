@@ -5,8 +5,8 @@ from delta_time_particle import DeltaTimeParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-FLOATING_SPEED = 100
-FADE_OUT_SPEED = 200
+FLOATING_SPEED = -100
+FADE_OUT_SPEED = -200
 CREATION_RATE = 80
 
 
@@ -19,17 +19,12 @@ class FloatingParticle(DeltaTimeParticle):
         surface.set_colorkey(BLACK)
         pygame.draw.circle(surface, WHITE, (1, 1), 1)
         self.set_surface(surface.convert_alpha())
-        self.velocity = (0, -FLOATING_SPEED)
+        self.velocity = (0, FLOATING_SPEED)
         self.set_fade_speed(FADE_OUT_SPEED)
 
-    def update(self, dt=1):
-        if not super().update(dt):
-            return False
-        if not self.fade(dt):
-            return False
-        if self.position[1] < 0:
-            return False
-        return True
+    def is_alive_after_update(self, dt):
+        self.update(dt)
+        return self.is_visible() and self.position[1] > 0
 
 
 
@@ -53,8 +48,9 @@ class FloatingCursor(Game):
 
     def update_game(self):
         super().update_game()
-        self.particles = [particle for particle in self.particles if particle.update(self.dt)]
+        self.particles = [p for p in self.particles if p.is_alive_after_update(self.dt)]
         return True
+
 
     def draw_game(self):
         self.screen.fill(BLACK)

@@ -4,7 +4,7 @@ from delta_time_particle import DeltaTimeParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-FADE_OUT_SPEED = 300
+FADE_OUT_SPEED = -300
 CREATION_RATE = 50
 
 
@@ -17,14 +17,9 @@ class SmokeParticle(DeltaTimeParticle):
         self.set_surface(surface.convert_alpha())
         self.set_fade_speed(FADE_OUT_SPEED)
 
-    def update(self, dt=1):
-        if not super().update(dt):
-            return False
-        if not self.fade(dt):
-            return False
-        if self.position[1] < 0:
-            return False
-        return True
+    def is_alive_after_update(self, dt):
+        self.update(dt)
+        return self.is_visible()
 
 
 
@@ -48,7 +43,7 @@ class SmokingCursor(Game):
 
     def update_game(self):
         super().update_game()
-        self.particles = [particle for particle in self.particles if particle.update(self.dt)]
+        self.particles = [p for p in self.particles if p.is_alive_after_update(self.dt)]
         return True
 
     def draw_game(self):
