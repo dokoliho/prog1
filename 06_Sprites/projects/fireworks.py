@@ -14,6 +14,10 @@ FLOATING_SPEED = -100
 FADE_OUT_SPEED = -200
 CREATION_RATE = 80
 EXPLOSION_COUNT = 1000
+MIN_LIFETIME = 1000
+MAX_LIFETIME = 1200
+MIN_EXPLOSION_SPEED = 50
+MAX_EXPLOSION_SPEED = 400
 
 class FloatingParticle(DeltaTimeParticle):
     def __init__(self, x, y):
@@ -35,7 +39,7 @@ class ExplodingParticle(DeltaTimeParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.creation_time = pygame.time.get_ticks()
-        self.lifetime = random.randint(1000, 1200)
+        self.lifetime = random.randint(MIN_LIFETIME, MAX_LIFETIME)
         self.color = random.choice([RED, GREEN, BLUE])
         surface = pygame.Surface((4, 4))
         surface.fill(BLACK)
@@ -43,7 +47,7 @@ class ExplodingParticle(DeltaTimeParticle):
         pygame.draw.circle(surface, self.color, (2, 2), 2)
         self.set_surface(surface.convert_alpha())
         direction = math.radians(random.randint(0, 360))
-        speed = random.randint(50, 400)
+        speed = random.randint(MIN_EXPLOSION_SPEED, MAX_EXPLOSION_SPEED)
         self.velocity = (math.cos(direction) * speed, math.sin(direction) * speed)
         self.set_fade_speed(FADE_OUT_SPEED)
 

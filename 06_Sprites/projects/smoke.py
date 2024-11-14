@@ -4,7 +4,7 @@ from delta_time_particle import DeltaTimeParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-FADE_OUT_SPEED = -300
+FADE_OUT_SPEED = -200
 CREATION_RATE = 50
 
 
