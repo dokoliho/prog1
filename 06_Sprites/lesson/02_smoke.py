@@ -24,7 +24,8 @@ class SmokeParticle(DeltaTimeParticle):
 
 
 class SmokingCursor(Game):
-    def init_game_state(self):
+    def init_game(self):
+        super().init_game()
         self.particles = []
         self.floating_timer = pygame.event.custom_type()
         pygame.time.set_timer(self.floating_timer, 1000 // CREATION_RATE)

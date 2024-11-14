@@ -74,7 +74,8 @@ class Fox(DeltaTimeParticle):
 
 
 class RunningFox(Game):
-    def init_game_state(self):
+    def init_game(self):
+        super().init_game()
         self.fox = Fox(WIDTH // 2, HEIGHT // 2)
 
     def handle_event(self, event):

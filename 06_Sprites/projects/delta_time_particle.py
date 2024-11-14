@@ -3,14 +3,14 @@ from particle import Particle
 class DeltaTimeParticle(Particle):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.fade_speed = 0
-        self.alpha = 255
+        self._fade_speed = 0
+        self._alpha = 255
 
     def set_fade_speed(self, fade_speed):
-        self.fade_speed = fade_speed
+        self._fade_speed = fade_speed
 
     def set_alpha(self, alpha):
-        self.alpha = alpha
+        self._alpha = alpha
 
     def update(self, dt=1):
         self.velocity = (self.velocity[0] + self.acceleration[0] * dt, self.velocity[1] + self.acceleration[1] * dt)
@@ -19,11 +19,11 @@ class DeltaTimeParticle(Particle):
         self.fade(dt)
 
     def fade(self, dt):
-        self.alpha += self.fade_speed * dt
-        self.alpha = max(0, min(self.alpha, 255))
+        self._alpha += self._fade_speed * dt
+        self._alpha = max(0, min(self._alpha, 255))
         if self._surface != None:
-            self._surface.set_alpha(self.alpha)
+            self._surface.set_alpha(self._alpha)
 
     def is_visible(self):
-        return self.alpha > 0
+        return self._alpha > 0
 
