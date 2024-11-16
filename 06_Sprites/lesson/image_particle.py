@@ -4,7 +4,7 @@ from delta_time_particle import DeltaTimeParticle
 class ImageParticle(DeltaTimeParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self._images = None
+        self._image = None
         self._target_size = None
 
     def set_target_size(self, target_size):
@@ -17,8 +17,6 @@ class ImageParticle(DeltaTimeParticle):
         if self._target_size != None:
             image = pygame.transform.scale(image, self._target_size)
         self._image = image.convert_alpha()
-
-
 
     def draw(self, screen):
         if self._image is None:

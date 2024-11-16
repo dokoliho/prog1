@@ -1,6 +1,7 @@
 import pygame
 from game import Game
 from delta_time_particle import DeltaTimeParticle
+from image_particle import ImageParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -8,13 +9,11 @@ FADE_OUT_SPEED = -200
 CREATION_RATE = 50
 
 
-class SmokeParticle(DeltaTimeParticle):
-
+class SmokeParticle(ImageParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
-        surface = pygame.image.load("fading_circle.png")
-        surface = pygame.transform.scale(surface, (50, 50))
-        self.set_surface(surface.convert_alpha())
+        self.set_target_size((50, 50))
+        self.read_image("fading_circle.png")
         self.set_fade_speed(FADE_OUT_SPEED)
 
     def is_alive_after_update(self, dt):
