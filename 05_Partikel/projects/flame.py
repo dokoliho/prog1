@@ -54,7 +54,6 @@ def init_flame():
 
 # Initialisierung eines Flammenpartikels
 def new_particle():
-    global particles
     x = WIDTH // 2 + random.randint(-SPREAD, SPREAD)
     y = HEIGHT // 4 * 3 + random.randint(1, SPREAD)
     particle = Particle(x, y)
@@ -81,7 +80,6 @@ def exit_game():
 
 # Behandlung der Events
 def event_handling():
-    global density, wind
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False

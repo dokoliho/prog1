@@ -1,35 +1,36 @@
 import pygame
+import random
 from game import Game
 from delta_time_particle import DeltaTimeParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-FADE_OUT_SPEED = 300
-CREATION_RATE = 50
+FLOATING_SPEED = -100
+FADE_OUT_SPEED = -200
+CREATION_RATE = 80
 
 
-class SmokeParticle(DeltaTimeParticle):
+class FloatingParticle(DeltaTimeParticle):
 
     def __init__(self, x, y):
         super().__init__(x, y)
-        surface = pygame.image.load("fading_circle.png")
-        surface = pygame.transform.scale(surface, (50, 50))
+        surface = pygame.Surface((2, 2))
+        surface.fill(BLACK)
+        surface.set_colorkey(BLACK)
+        pygame.draw.circle(surface, WHITE, (1, 1), 1)
         self.set_surface(surface.convert_alpha())
+        self.velocity = (0, FLOATING_SPEED)
         self.set_fade_speed(FADE_OUT_SPEED)
 
-    def update(self, dt=1):
-        if not super().update(dt):
-            return False
-        if not self.fade(dt):
-            return False
-        if self.position[1] < 0:
-            return False
-        return True
+    def is_alive_after_update(self, dt):
+        self.update(dt)
+        return self.is_visible() and self.position[1] > 0
 
 
 
-class SmokingCursor(Game):
-    def init_game_state(self):
+class FloatingCursor(Game):
+    def init_game(self):
+        super().init_game()
         self.particles = []
         self.floating_timer = pygame.event.custom_type()
         pygame.time.set_timer(self.floating_timer, 1000 // CREATION_RATE)
@@ -43,13 +44,14 @@ class SmokingCursor(Game):
 
     def spawn_floating_particle(self):
         init_pos = pygame.mouse.get_pos()
-        particle = SmokeParticle(init_pos[0], init_pos[1])
+        particle = FloatingParticle(init_pos[0] + random.randint(-10, 10), init_pos[1] + random.randint(-10, 10))
         self.particles.append(particle)
 
     def update_game(self):
         super().update_game()
-        self.particles = [particle for particle in self.particles if particle.update(self.dt)]
+        self.particles = [p for p in self.particles if p.is_alive_after_update(self.dt)]
         return True
+
 
     def draw_game(self):
         self.screen.fill(BLACK)
@@ -58,5 +60,5 @@ class SmokingCursor(Game):
         pygame.display.flip()
 
 if __name__ == "__main__":
-    game = SmokingCursor("Smoking Cursor")
+    game = FloatingCursor("Floating Cursor")
     game.run()

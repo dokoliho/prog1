@@ -5,15 +5,15 @@ class Particle:
         self.position = (x, y)
         self.velocity = (0, 0)
         self.acceleration = (0, 0)
-        self.fade_speed = 0
-        self.alpha = 255
+        self._fade_speed = 0
+        self._alpha = 255
         self._surface = None
 
     def set_surface(self, surface):
         self._surface = surface
 
     def set_fade_speed(self, fade_speed):
-        self.fade_speed = fade_speed
+        self._fade_speed = fade_speed
 
     def apply_force(self, force):
         self.acceleration = (self.acceleration[0] + force[0], self.acceleration[1] + force[1])
@@ -25,11 +25,11 @@ class Particle:
         return True
 
     def fade(self, dt):
-        self.alpha -= self.fade_speed * dt
-        if self.alpha <= 0:
+        self._alpha -= self._fade_speed * dt
+        if self._alpha <= 0:
             return False
         if self._surface != None:
-            self._surface.set_alpha(self.alpha)
+            self._surface.set_alpha(self._alpha)
         return True
 
     def draw(self, screen):

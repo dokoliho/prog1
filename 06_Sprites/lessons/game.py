@@ -19,7 +19,7 @@ class Game:
 
     def game_loop(self):
         while True:
-            # Berechnung der Zeitdifferenz seit dem letzten Frame
+            # Berechnung der Zeitdifferenz seit dem letzten Frame in Sekunden
             self.dt = self.clock.tick(self.fps) / 1000
             if self.event_handling() == False:
                 break

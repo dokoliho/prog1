@@ -3,19 +3,23 @@ import pygame
 import random
 import math
 from game import Game
-from particle import Particle
+from delta_time_particle import DeltaTimeParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-FLOATING_SPEED = 100
-FADE_OUT_SPEED = 200
+FLOATING_SPEED = -100
+FADE_OUT_SPEED = -200
 CREATION_RATE = 80
 EXPLOSION_COUNT = 1000
+MIN_LIFETIME = 1000
+MAX_LIFETIME = 1200
+MIN_EXPLOSION_SPEED = 50
+MAX_EXPLOSION_SPEED = 400
 
-class FloatingParticle(Particle):
+class FloatingParticle(DeltaTimeParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         surface = pygame.Surface((2, 2))
@@ -23,24 +27,19 @@ class FloatingParticle(Particle):
         surface.set_colorkey(BLACK)
         pygame.draw.circle(surface, WHITE, (1, 1), 1)
         self.set_surface(surface.convert_alpha())
-        self.velocity = (0, -FLOATING_SPEED)
+        self.velocity = (0, FLOATING_SPEED)
         self.set_fade_speed(FADE_OUT_SPEED)
 
-    def update(self, dt=1):
-        if not super().update(dt):
-            return False
-        if not self.fade(dt):
-            return False
-        if self.position[1] < 0:
-            return False
-        return True
+    def is_alive_after_update(self, dt):
+        self.update(dt)
+        return self.is_visible() and self.position[1] > 0
 
 
-class ExplodingParticle(Particle):
+class ExplodingParticle(DeltaTimeParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.creation_time = pygame.time.get_ticks()
-        self.lifetime = random.randint(1000, 1200)
+        self.lifetime = random.randint(MIN_LIFETIME, MAX_LIFETIME)
         self.color = random.choice([RED, GREEN, BLUE])
         surface = pygame.Surface((4, 4))
         surface.fill(BLACK)
@@ -48,19 +47,17 @@ class ExplodingParticle(Particle):
         pygame.draw.circle(surface, self.color, (2, 2), 2)
         self.set_surface(surface.convert_alpha())
         direction = math.radians(random.randint(0, 360))
-        speed = random.randint(50, 400)
+        speed = random.randint(MIN_EXPLOSION_SPEED, MAX_EXPLOSION_SPEED)
         self.velocity = (math.cos(direction) * speed, math.sin(direction) * speed)
         self.set_fade_speed(FADE_OUT_SPEED)
 
-    def update(self, dt=1):
-        if not super().update(dt):
-            return False
-        if not self.fade(dt):
-            return False
-        return True
+    def is_alive_after_update(self, dt):
+        self.update(dt)
+        return self.is_visible()
 
 class Firework(Game):
-    def init_game_state(self):
+    def init_game(self):
+        super().init_game()
         self.particles = []
         self.floating_timer = pygame.event.custom_type()
         pygame.time.set_timer(self.floating_timer, 1000 // CREATION_RATE)
@@ -87,7 +84,7 @@ class Firework(Game):
 
     def update_game(self):
         super().update_game()
-        self.particles = [particle for particle in self.particles if particle.update(self.dt)]
+        self.particles = [p for p in self.particles if p.is_alive_after_update(self.dt)]
         return True
 
     def draw_game(self):
@@ -95,6 +92,7 @@ class Firework(Game):
         for particle in self.particles:
             particle.draw(self.screen)
         pygame.display.flip()
+
 
 if __name__ == "__main__":
     game = Firework("Feuerwerk")
