@@ -1,6 +1,6 @@
 import random
 
-COINS = 100000
+COINS = 2000000
 
 def main():
     random.seed()
