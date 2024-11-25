@@ -9,7 +9,6 @@ class Game:
         self.clock = pygame.time.Clock()
         self.dt = 0
         self.screen = None
-        self.init_game()
 
     def init_game(self):
         pygame.init()
