@@ -1,8 +1,6 @@
 import pygame
 import random
 
-from pygments.styles.paraiso_light import YELLOW
-
 # Festlegung der Konstanten
 WIDTH = 320
 HEIGHT = 240
