@@ -49,7 +49,8 @@ class FloatingCursor(Game):
 
     def update_game(self):
         super().update_game()
-        self.particles = [p for p in self.particles if p.is_alive_after_update(self.dt)]
+        self.particles = [p for p in self.particles
+                          if p.is_alive_after_update(self.dt)]
         return True
 
 

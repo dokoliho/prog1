@@ -15,10 +15,6 @@ class GridApp(AppWindow):
  #       self.root.grid_rowconfigure(1, weight=1)  # Zeile 0 behält ihre Größe
  #       self.root.grid_rowconfigure(2, weight=1)  # Zeile 0 behält ihre Größe
 
-        # Spalte konfigurieren (damit Labels sich horizontal dehnen können)
- #       self.root.grid_columnconfigure(0, weight=1)
- #       self.root.grid_columnconfigure(1, weight=1)
- #       self.root.grid_columnconfigure(2, weight=1)
 
 if __name__ == "__main__":
     app = GridApp(300, 300, "Grid")
