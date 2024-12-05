@@ -1,8 +1,6 @@
 import pygame
 import random
 
-from pygame.examples.moveit import HEIGHT
-
 from game import Game
 from image_particle import ImageParticle
 from delta_time_particle import DeltaTimeParticle
