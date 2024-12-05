@@ -10,6 +10,7 @@ WIDTH = 640
 HEIGHT = 400
 SIZE = (WIDTH, HEIGHT)
 BLUE = (0, 0, 200)
+BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0)
 SHIP_SPEED = 200
 BULLET_RADIUS = 2
@@ -76,15 +77,15 @@ class Bullet(DeltaTimeParticle):
 
 class ExplosionSprite(Sprite):
 
-    target_size = (64, 64)
     images = []
 
     @staticmethod
     def prepare_sprite_sheet():
+        target_size = (64, 64)
         ExplosionSprite.images = Sprite.load_sprite_sheet(  "explosion.png",
                                                           6, 8,
                                                             sprite_height=256,
-                                                            target_size=ExplosionSprite.target_size)
+                                                            target_size=target_size)
 
     def __init__(self, x, y):
         super().__init__(x, y)
@@ -131,7 +132,7 @@ class ExplodingUfos(Game):
 
 
     def draw_game(self):
-        self.screen.fill(BLUE)
+        self.screen.fill(BLACK)
         self.ship.draw(self.screen)
         for bullet in self.bullets:
             bullet.draw(self.screen)

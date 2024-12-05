@@ -10,6 +10,7 @@ WIDTH = 640
 HEIGHT = 400
 SIZE = (WIDTH, HEIGHT)
 BLUE = (0, 0, 200)
+BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0)
 SHIP_SPEED = 200
 BULLET_RADIUS = 2
@@ -119,7 +120,7 @@ class ExplodingUfos(Game):
 
 
     def draw_game(self):
-        self.screen.fill(BLUE)
+        self.screen.fill(BLACK)
         self.ship.draw(self.screen)
         for bullet in self.bullets:
             bullet.draw(self.screen)
