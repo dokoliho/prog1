@@ -2,6 +2,7 @@ import pygame
 from delta_time_particle import DeltaTimeParticle
 
 class Sprite(DeltaTimeParticle):
+
     def __init__(self, x, y):
         super().__init__(x, y)
         self._images = []
@@ -19,6 +20,18 @@ class Sprite(DeltaTimeParticle):
     def read_sprite_sheet(self, sprite_sheet_name,
                           sprite_sheet_rows, sprite_sheet_columns,
                           sprite_width=None, sprite_height=None):
+        self._images = Sprite.load_sprite_sheet(sprite_sheet_name,
+                                                sprite_sheet_rows, sprite_sheet_columns,
+                                                sprite_width, sprite_height,
+                                                self._target_size)
+        self._animations["all"] = list(range(len(self._images)))
+
+    @staticmethod
+    def load_sprite_sheet(sprite_sheet_name,
+                          sprite_sheet_rows, sprite_sheet_columns,
+                          sprite_width=None, sprite_height=None,
+                          target_size=None):
+        images = []
         sprite_sheet = pygame.image.load(sprite_sheet_name)
         if sprite_width == None:
             sprite_width = sprite_sheet.get_width() // sprite_sheet_columns
@@ -31,10 +44,10 @@ class Sprite(DeltaTimeParticle):
                 image.blit(sprite_sheet, (0, 0), rect)
                 color = image.get_at((0, 0))
                 image.set_colorkey(color)
-                if self._target_size != None:
-                    image = pygame.transform.scale(image, self._target_size)
-                self._images.append(image.convert_alpha())
-        self._animations["all"] = list(range(len(self._images)))
+                if target_size != None:
+                    image = pygame.transform.scale(image, target_size)
+                images.append(image.convert_alpha())
+        return images
 
     def set_single_animation(self, animation_name, fps):
         self._current_animation = (animation_name, fps, 0, False)
