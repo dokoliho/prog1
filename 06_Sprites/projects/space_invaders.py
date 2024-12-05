@@ -10,7 +10,7 @@ from delta_time_particle import DeltaTimeParticle
 WIDTH = 640
 HEIGHT = 400
 SIZE = (WIDTH, HEIGHT)
-BLACK = (0, 0, 0)
+BLUE = (0, 0, 200)
 YELLOW = (255, 255, 0)
 RED = (255, 0, 0)
 SHIP_SPEED = 200
@@ -66,8 +66,8 @@ class Bullet(DeltaTimeParticle):
         def __init__(self, x, y):
             super().__init__(x, y)
             surface = pygame.Surface((BULLET_RADIUS*2, BULLET_RADIUS*2))
-            surface.fill(BLACK)
-            surface.set_colorkey(BLACK)
+            surface.fill(BLUE)
+            surface.set_colorkey(BLUE)
             pygame.draw.circle(surface, YELLOW, (BULLET_RADIUS, BULLET_RADIUS), BULLET_RADIUS)
             self.set_surface(surface.convert_alpha())
             self.velocity = (0, BULLET_SPEED)
@@ -89,8 +89,8 @@ class Bomb(DeltaTimeParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         surface = pygame.Surface((BOMB_RADIUS * 2, BOMB_RADIUS * 2))
-        surface.fill(BLACK)
-        surface.set_colorkey(BLACK)
+        surface.fill(BLUE)
+        surface.set_colorkey(BLUE)
         pygame.draw.circle(surface, RED, (BOMB_RADIUS, BOMB_RADIUS), BOMB_RADIUS)
         self.set_surface(surface.convert_alpha())
         self.velocity = (0, BOMB_SPEED)
@@ -143,7 +143,7 @@ class SpaceInvaders(Game):
 
 
     def draw_game(self):
-        self.screen.fill(BLACK)
+        self.screen.fill(BLUE)
         self.ship.draw(self.screen)
         for bullet in self.bullets:
             bullet.draw(self.screen)

@@ -11,6 +11,7 @@ WIDTH = 640
 HEIGHT = 400
 SIZE = (WIDTH, HEIGHT)
 BLACK = (0, 0, 0)
+BLUE = (0, 0, 200)
 YELLOW = (255, 255, 0)
 SHIP_SPEED = 200
 BULLET_RADIUS = 2
@@ -76,7 +77,7 @@ class SpaceShip(Game):
 
 
     def draw_game(self):
-        self.screen.fill(BLACK)
+        self.screen.fill(BLUE)
         self.ship.draw(self.screen)
         for bullet in self.bullets:
             bullet.draw(self.screen)
