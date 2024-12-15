@@ -1,6 +1,8 @@
 import pygame
 import random
 
+from pygame.examples.moveit import HEIGHT
+
 from game import Game
 from image_particle import ImageParticle
 from delta_time_particle import DeltaTimeParticle
@@ -8,8 +10,6 @@ from delta_time_particle import DeltaTimeParticle
 WIDTH = 640
 HEIGHT = 400
 SIZE = (WIDTH, HEIGHT)
-BLACK = (0, 0, 0)
-BLUE = (0, 0, 200)
 BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0)
 SHIP_SPEED = 200
