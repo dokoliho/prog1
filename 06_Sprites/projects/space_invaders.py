@@ -92,7 +92,6 @@ class Bullet(DeltaTimeParticle):
                     ufo.alive = False
                     game.bonus_particles.append(Bonus(ufo.position[0], ufo.position[1]))
                     game.score += 100
-                    print(game.score)
                     explosion = ExplosionSprite(ufo.position[0], ufo.position[1])
                     explosion.set_single_animation("explode", 30)
                     game.explosions.append(explosion)
