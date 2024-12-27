@@ -27,6 +27,10 @@ BONUS_FADE = -200
 UFO_IMAGE = "ufo.png"
 UFO_SIZE = (77, 32)
 UFO_START_SPEED = 100
+EXPLOSION_SHEET = "explosion.png"
+EXPLOSION_SHEET_ROWS = 6
+EXPLOSION_SHEET_COLUMNS = 8
+EXPLOSION_SPRITE_HEIGHT = 256
 
 class Spaceship(ImageParticle):
     def __init__(self, x, y):
@@ -144,8 +148,8 @@ class ExplosionSprite(Sprite):
     @staticmethod
     def prepare_sprite_sheet():
         ExplosionSprite.images = (
-            Sprite.load_sprite_sheet(  "explosion.png",6, 8,
-                                        sprite_height=256, target_size=ExplosionSprite.target_size))
+            Sprite.load_sprite_sheet(  EXPLOSION_SHEET, EXPLOSION_SHEET_ROWS, EXPLOSION_SHEET_COLUMNS,
+                                        sprite_height=EXPLOSION_SPRITE_HEIGHT, target_size=ExplosionSprite.target_size))
 
     def __init__(self, x, y):
         super().__init__(x, y)
