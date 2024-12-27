@@ -11,14 +11,17 @@ class ImageParticle(DeltaTimeParticle):
         self._target_size = target_size
 
     def read_image(self, image_name):
-        image = pygame.image.load(image_name)
-        color = image.get_at((0, 0))
-        image.set_colorkey(color)
+        image = ImageParticle.load_image(image_name)
         if self._target_size != None:
             image = pygame.transform.scale(image, self._target_size)
         self._image = image.convert_alpha()
 
-
+    @staticmethod
+    def load_image(image_name):
+        image = pygame.image.load(image_name)
+        color = image.get_at((0, 0))
+        image.set_colorkey(color)
+        return image.convert_alpha()
 
     def draw(self, screen):
         if self._image is None:
