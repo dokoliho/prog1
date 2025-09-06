@@ -21,8 +21,8 @@ Der Aufbau der Ordnerstruktur im Repository ist inhaltlich systematisch orientie
 
 Zusätzlich:
 
-- `.idea/` – Konfigurationsdateien für JetBrains-IDE (z. B. PyCharm)
 - `.gitignore` – Ausgeschlossene Dateien und Verzeichnisse für Git
+- `README.md` – Diese Beschreibung
 - `requirements.txt` – Liste der Python-Pakete, die benötigt werden (z. B. `pygame`)
 
 ---
