@@ -9,15 +9,15 @@ def main():
     sophia.screen.mainloop()
 
 # Eine Turtle zeichnet ein Quadrat
-def draw_square(turtle, length):
+def draw_square(t, length):
     for _ in range(4):
-        turtle.forward(length)
-        turtle.right(90)
+        t.forward(length)
+        t.right(90)
 
 # Eine Turtle zeichnet ein gefülltes Quadrat
-def draw_filled_square(turtle, length):
-    turtle.begin_fill()
-    draw_square(turtle, length)
-    turtle.end_fill()
+def draw_filled_square(t, length):
+    t.begin_fill()
+    draw_square(t, length)
+    t.end_fill()
 
 main()
