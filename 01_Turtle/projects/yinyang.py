@@ -19,43 +19,41 @@ def main():
 def draw_yin_yang(sophia, zoe, radius):
     # Schwarze Hälfte
     sophia.penup()
-    sophia.goto(0, -radius)
-    sophia.pendown()
-    sophia.begin_fill()
-    sophia.circle(radius, 180)  # Halbkreis
-    sophia.circle(radius // 2, 180)
-    sophia.circle(-radius // 2, 180)
-    sophia.end_fill()
+    sophia.right(90)
+    sophia.forward(radius)
+    sophia.left(90)
+    draw_fish_shape(sophia, radius)
 
     # Weiße Hälfte
     zoe.penup()
-    zoe.goto(0, -radius)
-    zoe.left(180)
-    zoe.pendown()
-    zoe.begin_fill()
-    zoe.circle(-radius, 180)  # Halbkreis
-    zoe.left(180)
-    zoe.circle(radius // 2, 180)
-    zoe.circle(-radius // 2, 180)
-    zoe.end_fill()
+    zoe.left(90)
+    zoe.forward(radius)
+    zoe.left(90)
+    draw_fish_shape(zoe, radius)
 
     # Schwarzer Punkt
-    sophia.penup()
-    sophia.goto(0, -((radius // 2) - (radius // 10)))
-    sophia.pendown()
-    sophia.begin_fill()
-    sophia.circle(radius // 10)
-    sophia.end_fill()
+    draw_dot(sophia, radius)
 
     # Weißer Punkt
-    zoe.penup()
-    zoe.goto(0, (radius // 2) + (radius // 10))
-    zoe.pendown()
-    zoe.begin_fill()
-    zoe.circle(radius // 10)
-    zoe.end_fill()
+    draw_dot(zoe, radius)
 
+def draw_fish_shape(t, radius):
+    t.pendown()
+    t.begin_fill()
+    t.circle(radius, 180)  # Halbkreis
+    t.circle(radius // 2, 180)
+    t.circle(-radius // 2, 180)
+    t.end_fill()
 
+def draw_dot(t, radius):
+    t.penup()
+    t.right(90)
+    t.forward(radius//2 - radius//10)
+    t.right(90)
+    t.pendown()
+    t.begin_fill()
+    t.circle(radius // 10)
+    t.end_fill()
 
 
 main()

@@ -9,45 +9,45 @@ def main():
     zoe.screen.mainloop()
 
 
-def draw_traffic_light(turtle):
-    draw_case(turtle)
-    turtle.forward(35)
-    turtle.left(90)
-    turtle.forward(10)
-    draw_light(turtle, 'green')
-    turtle.forward(60)
-    draw_light(turtle, 'yellow')
-    turtle.forward(60)
-    draw_light(turtle, 'red')
+def draw_traffic_light(t):
+    draw_case(t)
+    t.forward(35)
+    t.left(90)
+    t.forward(10)
+    draw_light(t, 'green')
+    t.forward(60)
+    draw_light(t, 'yellow')
+    t.forward(60)
+    draw_light(t, 'red')
 
 
-def draw_case(turtle):
-    turtle.pencolor('black')
-    turtle.fillcolor('black')
-    turtle.pendown()
-    turtle.begin_fill()
-    draw_rectangle(turtle, 70, 190)
-    turtle.end_fill()
-    turtle.penup()
+def draw_case(t):
+    t.pencolor('black')
+    t.fillcolor('black')
+    t.pendown()
+    t.begin_fill()
+    draw_rectangle(t, 70, 190)
+    t.end_fill()
+    t.penup()
 
 
-def draw_rectangle(turtle, width, height):
+def draw_rectangle(t, width, height):
     for _ in range(2):
-        turtle.forward(width)
-        turtle.left(90)
-        turtle.forward(height)
-        turtle.left(90)
+        t.forward(width)
+        t.left(90)
+        t.forward(height)
+        t.left(90)
 
 
-def draw_light(turtle, color):
-    turtle.pencolor(color)
-    turtle.fillcolor(color)
-    turtle.pendown()
-    turtle.begin_fill()
-    turtle.right(90)
-    turtle.circle(25)
-    turtle.end_fill()
-    turtle.penup()
-    turtle.left(90)
+def draw_light(t, color):
+    t.pencolor(color)
+    t.fillcolor(color)
+    t.pendown()
+    t.begin_fill()
+    t.right(90)
+    t.circle(25)
+    t.end_fill()
+    t.penup()
+    t.left(90)
 
 main()
