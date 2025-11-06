@@ -8,10 +8,6 @@ FPS = 30
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 CIRCLE_RADIUS = 10
-KEY_UP = 0
-KEY_DOWN = 1
-KEY_LEFT = 2
-KEY_RIGHT = 3
 SPEED = 5
 
 
@@ -25,12 +21,11 @@ def main():
 # Initialisierung von Pygame
 def init_game():
     global position
-    global keys_pressed
     global clock
     position = (WIDTH // 2, HEIGHT // 2)
-    keys_pressed = [False, False, False, False]
     clock = pygame.time.Clock()
     pygame.init()
+    pygame.display.set_caption('Walker WASD')
     return pygame.display.set_mode(SIZE)
 
 
@@ -56,31 +51,20 @@ def event_handling():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
-
-        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-            new_value = (event.type == pygame.KEYDOWN)
-            if event.key == pygame.K_UP or event.key == pygame.K_w:
-                keys_pressed[KEY_UP] = new_value
-            if event.key == pygame.K_DOWN or event.key == pygame.K_s:
-                keys_pressed[KEY_DOWN] = new_value
-            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                keys_pressed[KEY_LEFT] = new_value
-            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                keys_pressed[KEY_RIGHT] = new_value
-
     return True
 
 
 # Aktualisierung des Spiels
 def update_game():
     global position
-    if keys_pressed[KEY_UP]:
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_w]:
         position = (position[0], position[1] - SPEED)
-    if keys_pressed[KEY_DOWN]:
+    if keys_pressed[pygame.K_s]:
         position = (position[0], position[1] + SPEED)
-    if keys_pressed[KEY_LEFT]:
+    if keys_pressed[pygame.K_a]:
         position = (position[0] - SPEED, position[1])
-    if keys_pressed[KEY_RIGHT]:
+    if keys_pressed[pygame.K_d]:
         position = (position[0] + SPEED, position[1])
     return True
 
