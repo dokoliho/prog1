@@ -16,10 +16,10 @@ MIN_BALL_SPEED = 3
 MAX_BALL_SPEED = 5
 PAD_SPEED = 3
 DIRECTIONS = [-1, 1]
-LEFT_KEY_UP = 0
-LEFT_KEY_DOWN = 1
-RIGHT_KEY_UP = 2
-RIGHT_KEY_DOWN = 3
+LEFT_KEY_UP = pygame.K_w
+LEFT_KEY_DOWN = pygame.K_s
+RIGHT_KEY_UP = pygame.K_UP
+RIGHT_KEY_DOWN = pygame.K_DOWN
 
 # Hauptfunktion mit Standardstruktur eines Pygame
 def main():
@@ -30,14 +30,13 @@ def main():
 
 # Initialisierung von Pygame
 def init_game():
-    global left_pad, right_pad, ball, keys_pressed, clock, left_score, right_score, font
+    global left_pad, right_pad, ball, clock, left_score, right_score, font
     random.seed()
     left_pad = (10, HEIGHT // 2)
     right_pad = (WIDTH - 10 -PAD_SIZE[0], HEIGHT // 2)
     new_ball()
     left_score = 0
     right_score = 0
-    keys_pressed = [False, False, False, False]
     clock = pygame.time.Clock()
     pygame.init()
     font = pygame.font.Font(FONT_NAME, FONT_SIZE)
@@ -74,22 +73,7 @@ def event_handling():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
-        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-            handle_key_event(event)
     return True
-
-
-def handle_key_event(event):
-    global keys_pressed
-    new_value = (event.type == pygame.KEYDOWN)
-    if event.key == pygame.K_UP:
-        keys_pressed[RIGHT_KEY_UP] = new_value
-    if event.key == pygame.K_DOWN:
-        keys_pressed[RIGHT_KEY_DOWN] = new_value
-    if event.key == pygame.K_w:
-        keys_pressed[LEFT_KEY_UP] = new_value
-    if event.key == pygame.K_s:
-        keys_pressed[LEFT_KEY_DOWN] = new_value
 
 
 # Aktualisierung des Spiels
@@ -126,6 +110,7 @@ def update_ball_position():
 
 def update_pad_positions():
     global left_pad, right_pad
+    keys_pressed = pygame.key.get_pressed()
 
     if keys_pressed[LEFT_KEY_UP]:
         left_pad = (left_pad[0], max(0, left_pad[1] - PAD_SPEED))

@@ -2,8 +2,8 @@ import pygame
 import random
 
 # Festlegung der Konstanten
-SPEED = 3
-FPS = 30
+SPEED = 4
+FPS = 25
 WHITE = (255, 255, 255)
 BLOCK_SIZE = 7 * SPEED
 WIDTH = 14 * BLOCK_SIZE
@@ -16,8 +16,6 @@ BLOCK3 = (BLOCK_SIZE, 2 * BLOCK_SIZE) # vertikaler Zweier-Block
 BLOCK4 = (2 * BLOCK_SIZE, 2 * BLOCK_SIZE) # Vierer-Block
 SHAPES = [BLOCK1, BLOCK2, BLOCK3, BLOCK4]
 
-KEY_LEFT = 0
-KEY_RIGHT = 1
 
 # Hauptfunktion mit Standardstruktur eines Pygame
 def main():
@@ -30,12 +28,10 @@ def main():
 def init_game():
     global retired_blocks
     global active_block
-    global keys_pressed
     global clock
     random.seed()
     retired_blocks = [] # Liste der Blöcke, die nicht mehr fallen
     active_block = create_block() # Der fallende Block
-    keys_pressed = [False, False]   # Liste der gedrückten Tasten (LEFT, RIGHT)
     clock = pygame.time.Clock()
     pygame.init()
     return pygame.display.set_mode(SIZE)
@@ -62,37 +58,20 @@ def event_handling():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
-        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-            handle_key_event(event)
     return True
-
-
-def handle_key_event(event):
-    global keys_pressed
-    new_value = (event.type == pygame.KEYDOWN)
-    if event.key == pygame.K_LEFT:
-        keys_pressed[KEY_LEFT] = new_value
-    if event.key == pygame.K_RIGHT:
-        keys_pressed[KEY_RIGHT] = new_value
 
 
 # Aktualisierung des Spiels
 def update_game():
-    global retired_blocks, active_block
-
     check_hit_bottom()
     if active_block is None:
         return False
-
     check_hit_block()
     if active_block is None:
         return False
-
     move_active_block()
-
-
-
     return True
+
 
 def check_hit_bottom():
     global active_block, retired_blocks
@@ -100,6 +79,7 @@ def check_hit_bottom():
     if active_block[2] + shape[1] >= HEIGHT:
         retired_blocks.append(active_block)
         active_block = create_block()
+
 
 def check_hit_block():
     global active_block, retired_blocks
@@ -139,7 +119,8 @@ def move_active_block():
 def on_right_key():
     global active_block
     shape = active_block[0]
-    if keys_pressed[KEY_RIGHT] and active_block[1] + shape[0] <= WIDTH - BLOCK_SIZE:
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_RIGHT] and active_block[1] + shape[0] <= WIDTH - BLOCK_SIZE:
         for retired_block in retired_blocks:
             if would_move_into_block(active_block, retired_block, +BLOCK_SIZE):
                 break
@@ -150,7 +131,8 @@ def on_right_key():
 def on_left_key():
     global active_block
     shape = active_block[0]
-    if keys_pressed[KEY_LEFT] and active_block[1] >= BLOCK_SIZE:
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_LEFT] and active_block[1] >= BLOCK_SIZE:
         for retired_block in retired_blocks:
             if would_move_into_block(active_block, retired_block, -BLOCK_SIZE):
                 break

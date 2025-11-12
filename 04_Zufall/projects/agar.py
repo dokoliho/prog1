@@ -13,10 +13,6 @@ CELL_RADIUS = 5
 PELLET_RADIUS = 2
 PELLET_COUNT = 100
 SPEED = 3
-KEY_UP = 0
-KEY_DOWN = 1
-KEY_LEFT = 2
-KEY_RIGHT = 3
 
 # Hauptfunktion mit Standardstruktur eines Pygame
 def main():
@@ -29,7 +25,6 @@ def main():
 def init_game():
     global pellets
     global cell
-    global keys_pressed
     global clock
     random.seed()
     cell = (WIDTH // 2, HEIGHT // 2, CELL_RADIUS)
@@ -61,22 +56,7 @@ def event_handling():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
-        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-            handle_key_event(event)
     return True
-
-
-def handle_key_event(event):
-    global keys_pressed
-    new_value = (event.type == pygame.KEYDOWN)
-    if event.key == pygame.K_UP:
-        keys_pressed[KEY_UP] = new_value
-    if event.key == pygame.K_DOWN:
-        keys_pressed[KEY_DOWN] = new_value
-    if event.key == pygame.K_LEFT:
-        keys_pressed[KEY_LEFT] = new_value
-    if event.key == pygame.K_RIGHT:
-        keys_pressed[KEY_RIGHT] = new_value
 
 
 # Aktualisierung des Spiels
@@ -97,13 +77,14 @@ def update_cell_size():
 
 def update_cell_position():
     global cell
-    if keys_pressed[KEY_UP]:
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_UP]:
         cell = (cell[0], (cell[1] - SPEED) % HEIGHT, cell[2])
-    if keys_pressed[KEY_DOWN]:
+    if keys_pressed[pygame.K_DOWN]:
         cell = (cell[0], (cell[1] + SPEED) % HEIGHT, cell[2])
-    if keys_pressed[KEY_LEFT]:
+    if keys_pressed[pygame.K_LEFT]:
         cell = ((cell[0] - SPEED) % WIDTH, cell[1], cell[2])
-    if keys_pressed[KEY_RIGHT]:
+    if keys_pressed[pygame.K_RIGHT]:
         cell = ((cell[0] + SPEED) % WIDTH, cell[1], cell[2])
 
 
