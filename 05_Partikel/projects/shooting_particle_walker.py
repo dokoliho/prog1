@@ -96,26 +96,12 @@ def exit_game():
 
 # Behandlung der Events
 def event_handling():
-    global last_direction
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 add_shot()
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        last_direction = (-1, 0)
-        walker.apply_force((-FORCE, 0))
-    if keys[pygame.K_RIGHT]:
-        last_direction = (1, 0)
-        walker.apply_force((FORCE, 0))
-    if keys[pygame.K_UP]:
-        last_direction = (0, -1)
-        walker.apply_force((0, -FORCE))
-    if keys[pygame.K_DOWN]:
-        last_direction = (0, 1)
-        walker.apply_force((0, FORCE))
     return True
 
 
@@ -130,11 +116,29 @@ def add_shot():
 
 # Aktualisierung des Spiels
 def update_game():
-    global walker, shots
+    global shots
+    move_walker()
     walker.apply_force((walker.velocity[0] * -FRICTION, walker.velocity[1] * -FRICTION))
     walker.update()
     shots = [shot for shot in shots if shot_alive_after_update(shot)]
     return True
+
+
+def move_walker():
+    global last_direction
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        last_direction = (-1, 0)
+        walker.apply_force((-FORCE, 0))
+    if keys[pygame.K_RIGHT]:
+        last_direction = (1, 0)
+        walker.apply_force((FORCE, 0))
+    if keys[pygame.K_UP]:
+        last_direction = (0, -1)
+        walker.apply_force((0, -FORCE))
+    if keys[pygame.K_DOWN]:
+        last_direction = (0, 1)
+        walker.apply_force((0, FORCE))
 
 
 def shot_alive_after_update(shot):

@@ -90,6 +90,11 @@ def event_handling():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
+    return True
+
+
+# Aktualisierung des Spiels
+def update_game():
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         particle.apply_force((-FORCE, 0))
@@ -99,12 +104,6 @@ def event_handling():
         particle.apply_force((0, -FORCE))
     if keys[pygame.K_DOWN]:
         particle.apply_force((0, FORCE))
-    return True
-
-
-# Aktualisierung des Spiels
-def update_game():
-    global particle
     particle.apply_force((particle.velocity[0] * -FRICTION, particle.velocity[1] * -FRICTION))
     particle.update()
     return True

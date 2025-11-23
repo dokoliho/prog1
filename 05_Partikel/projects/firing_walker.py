@@ -37,7 +37,6 @@ def init_game():
     global shots
     global last_shot
     position = (WIDTH // 2, HEIGHT // 2)
-    keys_pressed = [False, False, False, False]
     shots = []
     last_shot= pygame.time.get_ticks()
     clock = pygame.time.Clock()
@@ -64,22 +63,9 @@ def exit_game():
 
 # Behandlung der Events
 def event_handling():
-    global keys_pressed
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
-
-        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-            new_value = (event.type == pygame.KEYDOWN)
-            if event.key == pygame.K_UP:
-                keys_pressed[KEY_UP] = new_value
-            if event.key == pygame.K_DOWN:
-                keys_pressed[KEY_DOWN] = new_value
-            if event.key == pygame.K_LEFT:
-                keys_pressed[KEY_LEFT] = new_value
-            if event.key == pygame.K_RIGHT:
-                keys_pressed[KEY_RIGHT] = new_value
-
     return True
 
 
@@ -92,13 +78,14 @@ def update_game():
 
 def update_position():
     global position
-    if keys_pressed[KEY_UP]:
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_UP]:
         position = (position[0], position[1] - SPEED)
-    if keys_pressed[KEY_DOWN]:
+    if keys_pressed[pygame.K_DOWN]:
         position = (position[0], position[1] + SPEED)
-    if keys_pressed[KEY_LEFT]:
+    if keys_pressed[pygame.K_LEFT]:
         position = (position[0] - SPEED, position[1])
-    if keys_pressed[KEY_RIGHT]:
+    if keys_pressed[pygame.K_RIGHT]:
         position = (position[0] + SPEED, position[1])
 
 
