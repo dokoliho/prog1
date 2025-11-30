@@ -86,16 +86,16 @@ def event_handling():
 # Aktualisierung des Spiels
 def update_game():
     global drops
-    new_drops = []
-    for drop in drops:
-        drop.apply_force(GRAVITY)
-        drop.update()
-        if drop.position[1] < HEIGHT:
-            new_drops.append(drop)
-    drops = new_drops
+    drops = [drop for drop in drops if is_drop_alive_after_update(drop)]
     if pygame.time.get_ticks() - last_drop > 1000 // DROP_RATE:
         add_drop()
     return True
+
+
+def is_drop_alive_after_update(drop):
+    drop.apply_force(GRAVITY)
+    drop.update()
+    return drop.position[1] < HEIGHT
 
 
 # Zeichnen des Spiels
