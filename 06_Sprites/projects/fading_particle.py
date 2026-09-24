@@ -1,6 +1,6 @@
 from particle import Particle
 
-class DeltaTimeParticle(Particle):
+class FadingParticle(Particle):
     def __init__(self, x, y):
         super().__init__(x, y)
         self._fade_speed = 0

@@ -5,7 +5,7 @@ from pygame.examples.moveit import HEIGHT
 
 from game import Game
 from image_particle import ImageParticle
-from delta_time_particle import DeltaTimeParticle
+from fading_particle import FadingParticle
 
 WIDTH = 640
 HEIGHT = 400
@@ -30,7 +30,7 @@ class Spaceship(ImageParticle):
 
 
 
-class Bullet(DeltaTimeParticle):
+class Bullet(FadingParticle):
         def __init__(self, x, y):
             super().__init__(x, y)
             surface = pygame.Surface((BULLET_RADIUS*2, BULLET_RADIUS*2))

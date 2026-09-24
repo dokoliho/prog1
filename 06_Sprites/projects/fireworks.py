@@ -3,7 +3,7 @@ import pygame
 import random
 import math
 from game import Game
-from delta_time_particle import DeltaTimeParticle
+from fading_particle import FadingParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -19,7 +19,7 @@ MAX_LIFETIME = 1200
 MIN_EXPLOSION_SPEED = 50
 MAX_EXPLOSION_SPEED = 400
 
-class FloatingParticle(DeltaTimeParticle):
+class FloatingParticle(FadingParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         surface = pygame.Surface((2, 2))
@@ -35,7 +35,7 @@ class FloatingParticle(DeltaTimeParticle):
         return self.is_visible() and self.position[1] > 0
 
 
-class ExplodingParticle(DeltaTimeParticle):
+class ExplodingParticle(FadingParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.creation_time = pygame.time.get_ticks()

@@ -1,6 +1,6 @@
 import pygame
 from game import Game
-from delta_time_particle import DeltaTimeParticle
+from fading_particle import FadingParticle
 from image_particle import ImageParticle
 
 WHITE = (255, 255, 255)

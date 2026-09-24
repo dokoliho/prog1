@@ -1,7 +1,7 @@
 import pygame
-from delta_time_particle import DeltaTimeParticle
+from fading_particle import FadingParticle
 
-class Sprite(DeltaTimeParticle):
+class Sprite(FadingParticle):
 
     def __init__(self, x, y):
         super().__init__(x, y)

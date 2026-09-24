@@ -1,7 +1,7 @@
 import pygame
 import random
 from game import Game
-from delta_time_particle import DeltaTimeParticle
+from fading_particle import FadingParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -10,7 +10,7 @@ FADE_OUT_SPEED = -200
 CREATION_RATE = 80
 
 
-class FloatingParticle(DeltaTimeParticle):
+class FloatingParticle(FadingParticle):
 
     def __init__(self, x, y):
         super().__init__(x, y)

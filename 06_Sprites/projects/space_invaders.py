@@ -3,7 +3,7 @@ import random
 
 from game import Game
 from image_particle import ImageParticle
-from delta_time_particle import DeltaTimeParticle
+from fading_particle import FadingParticle
 from sprite import Sprite
 
 WIDTH = 640
@@ -71,7 +71,7 @@ class Ufo(ImageParticle):
         return self.is_visible() and self.alive
 
 
-class Bullet(DeltaTimeParticle):
+class Bullet(FadingParticle):
         def __init__(self, x, y):
             super().__init__(x, y)
             surface = pygame.Surface((BULLET_RADIUS*2, BULLET_RADIUS*2))
@@ -99,7 +99,7 @@ class Bullet(DeltaTimeParticle):
             return self.is_visible() and self.position[1] > 0
 
 
-class Bomb(DeltaTimeParticle):
+class Bomb(FadingParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         surface = pygame.Surface((BOMB_RADIUS * 2, BOMB_RADIUS * 2))
@@ -126,7 +126,7 @@ class Bomb(DeltaTimeParticle):
         return self.is_visible() and self.position[1] < HEIGHT
 
 
-class Bonus(DeltaTimeParticle):
+class Bonus(FadingParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         font = pygame.font.Font(None, 20)

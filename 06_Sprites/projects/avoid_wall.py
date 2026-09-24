@@ -2,7 +2,7 @@ import pygame
 import random
 import math
 from game import Game
-from delta_time_particle import DeltaTimeParticle
+from fading_particle import FadingParticle
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -14,7 +14,7 @@ MARGIN = 75
 MAX_SPEED = 120
 MAX_FORCE = 200
 
-class Avoider(DeltaTimeParticle):
+class Avoider(FadingParticle):
     def __init__(self, x, y):
         super().__init__(x, y)
         surface = pygame.Surface((10, 10))
