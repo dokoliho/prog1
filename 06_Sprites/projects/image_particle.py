@@ -12,7 +12,7 @@ class ImageParticle(DeltaTimeParticle):
 
     def read_image(self, image_name):
         image = ImageParticle.load_image(image_name)
-        if self._target_size != None:
+        if self._target_size is not None:
             image = pygame.transform.scale(image, self._target_size)
         self._image = image.convert_alpha()
 
@@ -32,4 +32,4 @@ class ImageParticle(DeltaTimeParticle):
         screen.blit(self._image, blit_position)
 
     def is_visible(self):
-        return super().is_visible() and self._image != None
+        return super().is_visible() and self._image is not None

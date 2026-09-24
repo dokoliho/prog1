@@ -13,7 +13,7 @@ class Editor(AppWindow):
 
     def load_file(self):
         file_path = filedialog.askopenfilename()
-        if file_path != None:  # Falls der Benutzer eine Datei ausgewählt hat
+        if file_path is not None:  # Falls der Benutzer eine Datei ausgewählt hat
             with open(file_path, "r") as file:
                 content = file.read()
                 self.text_area.delete(1.0, tk.END)
@@ -23,7 +23,7 @@ class Editor(AppWindow):
         file_path = filedialog.asksaveasfilename(
                 defaultextension=".txt",
         )
-        if file_path != None:  # Falls der Benutzer einen Speicherort gewählt hat
+        if file_path is not None:  # Falls der Benutzer einen Speicherort gewählt hat
             with open(file_path, "w") as file:
                 content = self.text_area.get(1.0, tk.END)
                 file.write(content)

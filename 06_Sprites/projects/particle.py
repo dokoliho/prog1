@@ -28,7 +28,7 @@ class Particle:
         self._alpha -= self._fade_speed * dt
         if self._alpha <= 0:
             return False
-        if self._surface != None:
+        if self._surface is not None:
             self._surface.set_alpha(self._alpha)
         return True
 

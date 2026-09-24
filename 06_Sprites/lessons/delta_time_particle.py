@@ -21,7 +21,7 @@ class DeltaTimeParticle(Particle):
     def fade(self, dt):
         self._alpha += self._fade_speed * dt
         self._alpha = max(0, min(self._alpha, 255))
-        if self._surface != None:
+        if self._surface is not None:
             self._surface.set_alpha(self._alpha)
 
     def is_visible(self):
