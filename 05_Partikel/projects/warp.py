@@ -53,9 +53,9 @@ def new_star():
     star.velocity = (star.position[0] - WIDTH // 2, star.position[1] - HEIGHT // 2)
     star.velocity = normalize(star.velocity)
 
-    # Der Stern erhält eine zufällige Beschleunigung in die Richtung seiner Bewegung
-    star.acceleration = (star.velocity[0] * random.randint(1, MAX_ACCELERATION),
-                         star.velocity[1] * random.randint(1, MAX_ACCELERATION))
+    # Der Stern erhält einen zufälligen, dauerhaften Schub in die Richtung seiner Bewegung
+    star.thrust = (star.velocity[0] * random.randint(1, MAX_ACCELERATION),
+                   star.velocity[1] * random.randint(1, MAX_ACCELERATION))
 
     # Der Stern erhält eine zufällige Helligkeit und Größe
     brightness = random.randint(128, 255)
@@ -106,7 +106,7 @@ def update_game():
     global stars
     new_stars = []
     for star in stars:
-        star.apply_force((star.acceleration[0], star.acceleration[1]))
+        star.apply_force(star.thrust)
         star.update()
         if star.position[0] < 0 or star.position[0] > WIDTH:
             new_stars.append(new_star())
