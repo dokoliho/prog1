@@ -1,11 +1,16 @@
+def main():
+    char = input("Geben Sie einen Buchstaben ein: ")
+    text = input("Geben Sie einen Text ein: ")
+    counter = count_char(text, char)
+    print(f"Der Buchstabe {char} kommt {counter} mal im Text vor.")
 
-char = input("Geben Sie einen Buchstaben ein: ").lower()
-text = input("Geben Sie einen Text ein: ").lower()
 
-counter = 0
-for c in text:
-    if c == char:
-        counter += 1
+def count_char(text, char):
+    counter = 0
+    for c in text.lower():
+        if c == char.lower():
+            counter += 1
+    return counter
 
-print(f"Der Buchstabe {char} kommt {counter} mal im Text vor.")
 
+main()

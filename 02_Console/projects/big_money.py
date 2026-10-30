@@ -5,13 +5,13 @@ def main():
 
 
 # Funktion zur Formatierung von Geldbeträgen
-def format_money_string(cents):
-    euros = cents // 100
-    cents = cents % 100
-    thousands = euros // 1000
-    euros = euros % 1000
-    millions = thousands // 1000
-    thousands = thousands % 1000
+def format_money_string(total_cents):
+    total_euros = total_cents // 100
+    cents = total_cents % 100
+    total_thousands = total_euros // 1000
+    euros = total_euros % 1000
+    millions = total_thousands // 1000
+    thousands = total_thousands % 1000
     if millions > 0:
         return f'{millions}.{thousands:03}.{euros:03},{cents:02}'
     elif thousands > 0:
