@@ -87,7 +87,6 @@ def draw_game(screen):
 
 # Zeichnen des Ziffernblatts
 def draw_dial(screen, position):
-    global font
     # Rand
     pygame.draw.circle(screen, WHITE, position, CIRCLE_RADIUS, 1)
     # Ziffern

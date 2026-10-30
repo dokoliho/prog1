@@ -48,7 +48,6 @@ def exit_game():
 
 # Behandlung der Events
 def event_handling():
-    global position
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False

@@ -44,7 +44,6 @@ def exit_game():
 
 # Event-Behandlung
 def event_handling():
-    global clicks
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
