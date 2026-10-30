@@ -1,3 +1,6 @@
+def main():
+    print(sum_list([4, 7, 1]))
+
 
 def sum_list(lst):
     total = 0
@@ -5,4 +8,5 @@ def sum_list(lst):
         total += i
     return total
 
-print(sum_list([4, 7, 1])) 
+
+main()

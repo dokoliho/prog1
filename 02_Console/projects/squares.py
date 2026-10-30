@@ -8,4 +8,5 @@ def main():
         print(f"{i} quadriert ist {i*i}")
         i += 1
 
+
 main()

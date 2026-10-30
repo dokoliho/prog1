@@ -6,4 +6,5 @@ def main():
 
     print(f"Die Temperatur in Celsius beträgt {c:.1f}")
 
+
 main()

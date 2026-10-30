@@ -10,6 +10,7 @@ YELLOW = (255, 255, 0)
 BLOCKSIZE = 20
 FPS = 30
 
+
 # Hauptfunktion mit Standardstruktur eines Pygame
 def main():
     screen = init_game()
@@ -36,6 +37,7 @@ def game_loop(screen):
             break
         draw_game(screen)
         clock.tick(FPS)
+
 
 # Beenden von Pygame
 def exit_game():

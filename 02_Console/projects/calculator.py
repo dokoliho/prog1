@@ -9,4 +9,5 @@ def main():
         zahl2 = float(input("Zweite Zahl: "))
         print(f"Die Summe beträgt {zahl1 + zahl2}")
 
+
 main()

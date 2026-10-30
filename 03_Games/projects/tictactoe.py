@@ -12,6 +12,7 @@ FONT_SIZE = SEGMENT // 2
 FONT_NAME = None   # None = default font
 FPS = 30
 
+
 # Hauptfunktion mit Standardstruktur eines Pygame
 def main():
     screen = init_game()
@@ -41,6 +42,7 @@ def game_loop(screen):
         draw_game(screen)
         clock.tick(FPS)
 
+
 # Beenden von Pygame
 def exit_game():
     pygame.quit()
@@ -55,11 +57,7 @@ def event_handling():
             pos = pygame.mouse.get_pos()
             x = pos[0] // SEGMENT
             y = pos[1] // SEGMENT
-            free = True
-            for cell in cells:
-                if cell[0] == x and cell[1] == y:
-                    free = False
-            if free:
+            if (x, y) not in cells:
                 cells.append((x, y))
     return True
 
@@ -82,7 +80,7 @@ def draw_game(screen):
         if player == 0:
             text = font.render("X", True, WHITE)
         else:
-            text = font.render("0", True, WHITE)
+            text = font.render("O", True, WHITE)
         text_rect = text.get_rect(center=(cell[0] * SEGMENT + SEGMENT // 2,
                                           cell[1] * SEGMENT + SEGMENT // 2))
         screen.blit(text, text_rect)

@@ -11,6 +11,7 @@ def main():
     minutes = (sec % SECONDS_PER_HOUR) // SECONDS_PER_MINUTE
     seconds = sec % SECONDS_PER_MINUTE
 
-    print (f"Es ist {hours:02}:{minutes:02}:{seconds:02}.")
+    print(f"Es ist {hours:02}:{minutes:02}:{seconds:02}.")
+
 
 main()

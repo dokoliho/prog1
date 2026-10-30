@@ -2,29 +2,20 @@ import math
 
 GRAVITY = 9.8
 
+
 def main():
     input_start_parameters()
 
-    # Initialisierung
-    speed = (v_null * math.cos(alpha), v_null * math.sin(alpha))
-    acceleration = (0, -GRAVITY)
-    position = (0, 0)
-    time = 0
-
     # Simulation
-    while position[1] >= 0:
-        speed = (speed[0] + acceleration[0], speed[1] + acceleration[1])
-        position = (position[0] + speed[0], position[1] + speed[1])
-        print(f"Position: {position[0]:.2f}, {position[1]:.2f}")
-        time += 1
-    print(time, position[0])
+    simulated_time, simulated_distance = simulate_shot(alpha, v_null)
+    print(f"Die simulierte Flugzeit beträgt {simulated_time} Sekunden.")
+    print(f"Die simulierte Distanz beträgt {simulated_distance:.2f} Meter.")
 
     # Berechnung der exakten Werte
     flighttime = calculate_flighttime(alpha, v_null)
     print(f"Die exakte Flugzeit beträgt {flighttime:.2f} Sekunden.")
     distance = v_null * math.cos(alpha) * flighttime
     print(f"Die exakte Distanz beträgt {distance:.2f} Meter.")
-
 
 
 def input_start_parameters():
@@ -36,7 +27,22 @@ def input_start_parameters():
     alpha = math.radians(alpha)
 
 
+# Schrittweise Simulation des Schusses
+def simulate_shot(angle, velocity):
+    speed = (velocity * math.cos(angle), velocity * math.sin(angle))
+    acceleration = (0, -GRAVITY)
+    position = (0, 0)
+    time = 0
+    while position[1] >= 0:
+        speed = (speed[0] + acceleration[0], speed[1] + acceleration[1])
+        position = (position[0] + speed[0], position[1] + speed[1])
+        print(f"Position: {position[0]:.2f}, {position[1]:.2f}")
+        time += 1
+    return (time, position[0])
+
+
 def calculate_flighttime(angle, velocity):
     return 2 * velocity * math.sin(angle) / GRAVITY
+
 
 main()

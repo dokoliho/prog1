@@ -41,6 +41,7 @@ def game_loop(screen):
         draw_game(screen)
         clock.tick(FPS)
 
+
 # Beenden von Pygame
 def exit_game():
     pygame.quit()

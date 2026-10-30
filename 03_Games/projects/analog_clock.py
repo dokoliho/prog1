@@ -64,14 +64,14 @@ def event_handling():
 # Aktualisierung des Spiels
 def update_game():
     global hours_angle
-    global minuten_angle
+    global minutes_angle
     global seconds_angle
     now = datetime.datetime.now()
     hours = now.hour % 12
     minutes = now.minute
     seconds = now.second
     hours_angle = (hours * 60 + minutes) / 720 * 2 * math.pi
-    minuten_angle = minutes / 60 * 2 * math.pi
+    minutes_angle = minutes / 60 * 2 * math.pi
     seconds_angle = seconds / 60 * 2 * math.pi
     return True
 
@@ -101,17 +101,16 @@ def draw_dial(screen, position):
 
 # Zeichnen der Zeiger
 def draw_hands(screen, position):
-    end_pos_hours = (position[0] + math.sin(hours_angle) * HOURS_LENGTH, position[1] + math.cos(hours_angle) * HOURS_LENGTH * -1)
-    pygame.draw.line(screen, WHITE, position, end_pos_hours, 4)
+    draw_hand(screen, position, hours_angle, HOURS_LENGTH, WHITE, 4)
+    draw_hand(screen, position, minutes_angle, MINUTES_LENGTH, WHITE, 2)
+    draw_hand(screen, position, seconds_angle, SECONDS_LENGTH, RED, 1)
 
-    end_pos_minutes = (position[0] + math.sin(minuten_angle) * MINUTES_LENGTH, position[1] + math.cos(minuten_angle) * MINUTES_LENGTH * -1)
-    pygame.draw.line(screen, WHITE, position, end_pos_minutes, 2)
 
-    end_pos_seconds = (position[0] + math.sin(seconds_angle) * SECONDS_LENGTH, position[1] + math.cos(seconds_angle) * SECONDS_LENGTH * -1)
-    pygame.draw.line(screen, RED, position, end_pos_seconds, 1)
+# Zeichnen eines einzelnen Zeigers
+def draw_hand(screen, position, angle, length, color, width):
+    end_pos = (position[0] + math.sin(angle) * length, position[1] + math.cos(angle) * length * -1)
+    pygame.draw.line(screen, color, position, end_pos, width)
 
 
 # Start des Programms
 main()
-
-

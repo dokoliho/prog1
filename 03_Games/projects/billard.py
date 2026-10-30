@@ -60,6 +60,7 @@ def event_handling():
     return True
 
 
+# Reaktion auf Mausklick
 def button_pushed():
     global speed, pushed
     mouse_pos = pygame.mouse.get_pos()
@@ -77,14 +78,7 @@ def update_game():
     return True
 
 
-def calc_new_speed():
-    global speed, pushed
-    speed = (speed[0] * FRICTION, speed[1] * FRICTION)
-    if abs(speed[0]) < 0.1 and abs(speed[1]) < 0.1:
-        pushed = False
-        speed = (0.0, 0.0)
-
-
+# Berechnung der neuen Position
 def calc_new_position():
     global speed, position
     position = (position[0] + speed[0], position[1] + speed[1])
@@ -96,6 +90,15 @@ def calc_new_position():
         position = (position[0] + speed[0], position[1] + speed[1])
 
 
+# Berechnung der neuen Geschwindigkeit
+def calc_new_speed():
+    global speed, pushed
+    speed = (speed[0] * FRICTION, speed[1] * FRICTION)
+    if abs(speed[0]) < 0.1 and abs(speed[1]) < 0.1:
+        pushed = False
+        speed = (0.0, 0.0)
+
+
 # Zeichnen des Spiels
 def draw_game(screen):
     screen.fill(GREEN)
@@ -105,7 +108,6 @@ def draw_game(screen):
         if mouse_pos[0] > 0 and mouse_pos[0] < WIDTH-1 and mouse_pos[1] > 0 and mouse_pos[1] < HEIGHT-1:
             pygame.draw.line(screen, RED, position, mouse_pos, 2)
     pygame.display.flip()
-
 
 
 # Start des Programms
